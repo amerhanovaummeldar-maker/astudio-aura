@@ -14,16 +14,401 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      articles: {
+        Row: {
+          body: string | null
+          cover_url: string | null
+          created_at: string
+          excerpt: string | null
+          id: string
+          position: number
+          published: boolean
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          cover_url?: string | null
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          position?: number
+          published?: boolean
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          cover_url?: string | null
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          position?: number
+          published?: boolean
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      bookings: {
+        Row: {
+          booking_date: string
+          booking_time: string
+          client_name: string
+          client_phone: string
+          comment: string | null
+          created_at: string
+          id: string
+          service_id: string | null
+          service_name: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          booking_date: string
+          booking_time: string
+          client_name: string
+          client_phone: string
+          comment?: string | null
+          created_at?: string
+          id?: string
+          service_id?: string | null
+          service_name?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          booking_date?: string
+          booking_time?: string
+          client_name?: string
+          client_phone?: string
+          comment?: string | null
+          created_at?: string
+          id?: string
+          service_id?: string | null
+          service_name?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      gift_certificates: {
+        Row: {
+          amount: number
+          code: string
+          created_at: string
+          design: string
+          id: string
+          message: string | null
+          recipient_name: string
+          sender_name: string
+          status: string
+        }
+        Insert: {
+          amount: number
+          code?: string
+          created_at?: string
+          design?: string
+          id?: string
+          message?: string | null
+          recipient_name: string
+          sender_name: string
+          status?: string
+        }
+        Update: {
+          amount?: number
+          code?: string
+          created_at?: string
+          design?: string
+          id?: string
+          message?: string | null
+          recipient_name?: string
+          sender_name?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      portfolio_items: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          media_type: string
+          media_url: string
+          position: number
+          poster_url: string | null
+          published: boolean
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          media_type?: string
+          media_url: string
+          position?: number
+          poster_url?: string | null
+          published?: boolean
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          media_type?: string
+          media_url?: string
+          position?: number
+          poster_url?: string | null
+          published?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      quiz_options: {
+        Row: {
+          id: string
+          label: string
+          position: number
+          question_id: string
+          tag: string
+        }
+        Insert: {
+          id?: string
+          label: string
+          position?: number
+          question_id: string
+          tag: string
+        }
+        Update: {
+          id?: string
+          label?: string
+          position?: number
+          question_id?: string
+          tag?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_options_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "quiz_questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quiz_questions: {
+        Row: {
+          created_at: string
+          id: string
+          position: number
+          published: boolean
+          text: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          position?: number
+          published?: boolean
+          text: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          position?: number
+          published?: boolean
+          text?: string
+        }
+        Relationships: []
+      }
+      recommendation_rules: {
+        Row: {
+          addon_service_id: string | null
+          created_at: string
+          explanation: string
+          id: string
+          is_default: boolean
+          match_tags: string[]
+          priority: number
+          service_id: string | null
+          title: string
+        }
+        Insert: {
+          addon_service_id?: string | null
+          created_at?: string
+          explanation: string
+          id?: string
+          is_default?: boolean
+          match_tags?: string[]
+          priority?: number
+          service_id?: string | null
+          title: string
+        }
+        Update: {
+          addon_service_id?: string | null
+          created_at?: string
+          explanation?: string
+          id?: string
+          is_default?: boolean
+          match_tags?: string[]
+          priority?: number
+          service_id?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recommendation_rules_addon_service_id_fkey"
+            columns: ["addon_service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recommendation_rules_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reviews: {
+        Row: {
+          client_name: string
+          created_at: string
+          id: string
+          photo_url: string | null
+          published: boolean
+          review_date: string
+          text: string
+          updated_at: string
+        }
+        Insert: {
+          client_name: string
+          created_at?: string
+          id?: string
+          photo_url?: string | null
+          published?: boolean
+          review_date?: string
+          text: string
+          updated_at?: string
+        }
+        Update: {
+          client_name?: string
+          created_at?: string
+          id?: string
+          photo_url?: string | null
+          published?: boolean
+          review_date?: string
+          text?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          duration_minutes: number | null
+          id: string
+          name: string
+          position: number
+          price: number | null
+          published: boolean
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          duration_minutes?: number | null
+          id?: string
+          name: string
+          position?: number
+          price?: number | null
+          published?: boolean
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          duration_minutes?: number | null
+          id?: string
+          name?: string
+          position?: number
+          price?: number | null
+          published?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      settings: {
+        Row: {
+          key: string
+          updated_at: string
+          value: string | null
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          value?: string | null
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          value?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +535,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+    },
   },
 } as const
