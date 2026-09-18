@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as UslugiRouteImport } from './routes/uslugi'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UslugiRoute = UslugiRouteImport.update({
+  id: '/uslugi',
+  path: '/uslugi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/portfolio': typeof PortfolioRoute
+  '/uslugi': typeof UslugiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/portfolio': typeof PortfolioRoute
+  '/uslugi': typeof UslugiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/portfolio': typeof PortfolioRoute
+  '/uslugi': typeof UslugiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/portfolio' | '/uslugi'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/portfolio' | '/uslugi'
+  id: '__root__' | '/' | '/portfolio' | '/uslugi'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PortfolioRoute: typeof PortfolioRoute
+  UslugiRoute: typeof UslugiRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/uslugi': {
+      id: '/uslugi'
+      path: '/uslugi'
+      fullPath: '/uslugi'
+      preLoaderRoute: typeof UslugiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PortfolioRoute: PortfolioRoute,
+  UslugiRoute: UslugiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
