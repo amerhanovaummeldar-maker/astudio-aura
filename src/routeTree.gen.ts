@@ -10,7 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KontaktyRouteImport } from './routes/kontakty'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as PrimeritObrazRouteImport } from './routes/primerit-obraz'
+import { Route as TestVolosRouteImport } from './routes/test-volos'
+import { Route as UhodRouteImport } from './routes/uhod'
 import { Route as UslugiRouteImport } from './routes/uslugi'
 
 const IndexRoute = IndexRouteImport.update({
@@ -18,9 +22,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KontaktyRoute = KontaktyRouteImport.update({
+  id: '/kontakty',
+  path: '/kontakty',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrimeritObrazRoute = PrimeritObrazRouteImport.update({
+  id: '/primerit-obraz',
+  path: '/primerit-obraz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestVolosRoute = TestVolosRouteImport.update({
+  id: '/test-volos',
+  path: '/test-volos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UhodRoute = UhodRouteImport.update({
+  id: '/uhod',
+  path: '/uhod',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UslugiRoute = UslugiRouteImport.update({
@@ -31,31 +55,69 @@ const UslugiRoute = UslugiRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/kontakty': typeof KontaktyRoute
   '/portfolio': typeof PortfolioRoute
+  '/primerit-obraz': typeof PrimeritObrazRoute
+  '/test-volos': typeof TestVolosRoute
+  '/uhod': typeof UhodRoute
   '/uslugi': typeof UslugiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/kontakty': typeof KontaktyRoute
   '/portfolio': typeof PortfolioRoute
+  '/primerit-obraz': typeof PrimeritObrazRoute
+  '/test-volos': typeof TestVolosRoute
+  '/uhod': typeof UhodRoute
   '/uslugi': typeof UslugiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/kontakty': typeof KontaktyRoute
   '/portfolio': typeof PortfolioRoute
+  '/primerit-obraz': typeof PrimeritObrazRoute
+  '/test-volos': typeof TestVolosRoute
+  '/uhod': typeof UhodRoute
   '/uslugi': typeof UslugiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/portfolio' | '/uslugi'
+  fullPaths:
+    | '/'
+    | '/kontakty'
+    | '/portfolio'
+    | '/primerit-obraz'
+    | '/test-volos'
+    | '/uhod'
+    | '/uslugi'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/portfolio' | '/uslugi'
-  id: '__root__' | '/' | '/portfolio' | '/uslugi'
+  to:
+    | '/'
+    | '/kontakty'
+    | '/portfolio'
+    | '/primerit-obraz'
+    | '/test-volos'
+    | '/uhod'
+    | '/uslugi'
+  id:
+    | '__root__'
+    | '/'
+    | '/kontakty'
+    | '/portfolio'
+    | '/primerit-obraz'
+    | '/test-volos'
+    | '/uhod'
+    | '/uslugi'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  KontaktyRoute: typeof KontaktyRoute
   PortfolioRoute: typeof PortfolioRoute
+  PrimeritObrazRoute: typeof PrimeritObrazRoute
+  TestVolosRoute: typeof TestVolosRoute
+  UhodRoute: typeof UhodRoute
   UslugiRoute: typeof UslugiRoute
 }
 
@@ -68,11 +130,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/kontakty': {
+      id: '/kontakty'
+      path: '/kontakty'
+      fullPath: '/kontakty'
+      preLoaderRoute: typeof KontaktyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portfolio': {
       id: '/portfolio'
       path: '/portfolio'
       fullPath: '/portfolio'
       preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/primerit-obraz': {
+      id: '/primerit-obraz'
+      path: '/primerit-obraz'
+      fullPath: '/primerit-obraz'
+      preLoaderRoute: typeof PrimeritObrazRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/test-volos': {
+      id: '/test-volos'
+      path: '/test-volos'
+      fullPath: '/test-volos'
+      preLoaderRoute: typeof TestVolosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/uhod': {
+      id: '/uhod'
+      path: '/uhod'
+      fullPath: '/uhod'
+      preLoaderRoute: typeof UhodRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/uslugi': {
@@ -87,7 +177,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  KontaktyRoute: KontaktyRoute,
   PortfolioRoute: PortfolioRoute,
+  PrimeritObrazRoute: PrimeritObrazRoute,
+  TestVolosRoute: TestVolosRoute,
+  UhodRoute: UhodRoute,
   UslugiRoute: UslugiRoute,
 }
 export const routeTree = rootRouteImport
