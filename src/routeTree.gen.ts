@@ -13,9 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as KontaktyRouteImport } from './routes/kontakty'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PrimeritObrazRouteImport } from './routes/primerit-obraz'
+import { Route as SertifikatRouteImport } from './routes/sertifikat'
 import { Route as TestVolosRouteImport } from './routes/test-volos'
 import { Route as UhodRouteImport } from './routes/uhod'
 import { Route as UslugiRouteImport } from './routes/uslugi'
+import { Route as VhodRouteImport } from './routes/vhod'
+import { Route as ZapisRouteImport } from './routes/zapis'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -37,6 +40,11 @@ const PrimeritObrazRoute = PrimeritObrazRouteImport.update({
   path: '/primerit-obraz',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SertifikatRoute = SertifikatRouteImport.update({
+  id: '/sertifikat',
+  path: '/sertifikat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TestVolosRoute = TestVolosRouteImport.update({
   id: '/test-volos',
   path: '/test-volos',
@@ -52,24 +60,40 @@ const UslugiRoute = UslugiRouteImport.update({
   path: '/uslugi',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VhodRoute = VhodRouteImport.update({
+  id: '/vhod',
+  path: '/vhod',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ZapisRoute = ZapisRouteImport.update({
+  id: '/zapis',
+  path: '/zapis',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/kontakty': typeof KontaktyRoute
   '/portfolio': typeof PortfolioRoute
   '/primerit-obraz': typeof PrimeritObrazRoute
+  '/sertifikat': typeof SertifikatRoute
   '/test-volos': typeof TestVolosRoute
   '/uhod': typeof UhodRoute
   '/uslugi': typeof UslugiRoute
+  '/vhod': typeof VhodRoute
+  '/zapis': typeof ZapisRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/kontakty': typeof KontaktyRoute
   '/portfolio': typeof PortfolioRoute
   '/primerit-obraz': typeof PrimeritObrazRoute
+  '/sertifikat': typeof SertifikatRoute
   '/test-volos': typeof TestVolosRoute
   '/uhod': typeof UhodRoute
   '/uslugi': typeof UslugiRoute
+  '/vhod': typeof VhodRoute
+  '/zapis': typeof ZapisRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,9 +101,12 @@ export interface FileRoutesById {
   '/kontakty': typeof KontaktyRoute
   '/portfolio': typeof PortfolioRoute
   '/primerit-obraz': typeof PrimeritObrazRoute
+  '/sertifikat': typeof SertifikatRoute
   '/test-volos': typeof TestVolosRoute
   '/uhod': typeof UhodRoute
   '/uslugi': typeof UslugiRoute
+  '/vhod': typeof VhodRoute
+  '/zapis': typeof ZapisRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -88,27 +115,36 @@ export interface FileRouteTypes {
     | '/kontakty'
     | '/portfolio'
     | '/primerit-obraz'
+    | '/sertifikat'
     | '/test-volos'
     | '/uhod'
     | '/uslugi'
+    | '/vhod'
+    | '/zapis'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/kontakty'
     | '/portfolio'
     | '/primerit-obraz'
+    | '/sertifikat'
     | '/test-volos'
     | '/uhod'
     | '/uslugi'
+    | '/vhod'
+    | '/zapis'
   id:
     | '__root__'
     | '/'
     | '/kontakty'
     | '/portfolio'
     | '/primerit-obraz'
+    | '/sertifikat'
     | '/test-volos'
     | '/uhod'
     | '/uslugi'
+    | '/vhod'
+    | '/zapis'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -116,9 +152,12 @@ export interface RootRouteChildren {
   KontaktyRoute: typeof KontaktyRoute
   PortfolioRoute: typeof PortfolioRoute
   PrimeritObrazRoute: typeof PrimeritObrazRoute
+  SertifikatRoute: typeof SertifikatRoute
   TestVolosRoute: typeof TestVolosRoute
   UhodRoute: typeof UhodRoute
   UslugiRoute: typeof UslugiRoute
+  VhodRoute: typeof VhodRoute
+  ZapisRoute: typeof ZapisRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -151,6 +190,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrimeritObrazRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sertifikat': {
+      id: '/sertifikat'
+      path: '/sertifikat'
+      fullPath: '/sertifikat'
+      preLoaderRoute: typeof SertifikatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/test-volos': {
       id: '/test-volos'
       path: '/test-volos'
@@ -172,6 +218,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UslugiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vhod': {
+      id: '/vhod'
+      path: '/vhod'
+      fullPath: '/vhod'
+      preLoaderRoute: typeof VhodRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/zapis': {
+      id: '/zapis'
+      path: '/zapis'
+      fullPath: '/zapis'
+      preLoaderRoute: typeof ZapisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -180,9 +240,12 @@ const rootRouteChildren: RootRouteChildren = {
   KontaktyRoute: KontaktyRoute,
   PortfolioRoute: PortfolioRoute,
   PrimeritObrazRoute: PrimeritObrazRoute,
+  SertifikatRoute: SertifikatRoute,
   TestVolosRoute: TestVolosRoute,
   UhodRoute: UhodRoute,
   UslugiRoute: UslugiRoute,
+  VhodRoute: VhodRoute,
+  ZapisRoute: ZapisRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
