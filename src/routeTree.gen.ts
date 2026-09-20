@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as KontaktyRouteImport } from './routes/kontakty'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PrimeritObrazRouteImport } from './routes/primerit-obraz'
@@ -23,6 +24,11 @@ import { Route as ZapisRouteImport } from './routes/zapis'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KontaktyRoute = KontaktyRouteImport.update({
@@ -73,6 +79,7 @@ const ZapisRoute = ZapisRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/kontakty': typeof KontaktyRoute
   '/portfolio': typeof PortfolioRoute
   '/primerit-obraz': typeof PrimeritObrazRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/kontakty': typeof KontaktyRoute
   '/portfolio': typeof PortfolioRoute
   '/primerit-obraz': typeof PrimeritObrazRoute
@@ -98,6 +106,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/kontakty': typeof KontaktyRoute
   '/portfolio': typeof PortfolioRoute
   '/primerit-obraz': typeof PrimeritObrazRoute
@@ -112,6 +121,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/kontakty'
     | '/portfolio'
     | '/primerit-obraz'
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/kontakty'
     | '/portfolio'
     | '/primerit-obraz'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/kontakty'
     | '/portfolio'
     | '/primerit-obraz'
@@ -149,6 +161,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   KontaktyRoute: typeof KontaktyRoute
   PortfolioRoute: typeof PortfolioRoute
   PrimeritObrazRoute: typeof PrimeritObrazRoute
@@ -167,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kontakty': {
@@ -237,6 +257,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   KontaktyRoute: KontaktyRoute,
   PortfolioRoute: PortfolioRoute,
   PrimeritObrazRoute: PrimeritObrazRoute,
