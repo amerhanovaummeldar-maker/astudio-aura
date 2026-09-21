@@ -16,9 +16,8 @@ import {
 } from "@/lib/api";
 
 export const Route = createFileRoute("/zapis")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    service: typeof search['service'] === "string" ? (search['service'] as string) : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { service?: string } =>
+    typeof search["service"] === "string" ? { service: search["service"] } : {},
   head: () => ({
     meta: [
       { title: "Запись — А&Астудия" },

@@ -48,8 +48,14 @@ function CertificatePage() {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const value = Number(amount);
-    if (!value || value <= 0) return toast.error("Укажите сумму");
-    if (!recipient.trim() || !sender.trim()) return toast.error("Укажите имена получателя и отправителя");
+    if (!value || value <= 0) {
+      toast.error("Укажите сумму");
+      return;
+    }
+    if (!recipient.trim() || !sender.trim()) {
+      toast.error("Укажите имена получателя и отправителя");
+      return;
+    }
     setSaving(true);
     const { data, error } = await supabase
       .from("gift_certificates")

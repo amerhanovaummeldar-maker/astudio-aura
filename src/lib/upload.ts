@@ -9,7 +9,7 @@ export async function uploadMedia(file: File, folder = "portfolio") {
   const { error } = await supabase.storage.from("media").upload(path, file, {
     cacheControl: "31536000",
     upsert: false,
-    contentType: file.type || undefined,
+    ...(file.type ? { contentType: file.type } : {}),
   });
   if (error) throw error;
   const { data, error: signError } = await supabase.storage

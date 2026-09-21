@@ -8,11 +8,11 @@ export function Section({
   children,
   className,
 }: {
-  eyebrow?: string;
-  title?: string;
-  description?: string;
-  children?: ReactNode;
-  className?: string;
+  eyebrow?: string | undefined;
+  title?: string | undefined;
+  description?: string | undefined;
+  children?: ReactNode | undefined;
+  className?: string | undefined;
 }) {
   return (
     <section className={cn("mx-auto w-full max-w-6xl px-4 py-14 sm:py-20", className)}>
