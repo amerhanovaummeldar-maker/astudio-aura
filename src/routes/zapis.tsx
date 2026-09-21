@@ -16,9 +16,8 @@ import {
 } from "@/lib/api";
 
 export const Route = createFileRoute("/zapis")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    service: typeof search['service'] === "string" ? (search['service'] as string) : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { service?: string } =>
+    typeof search["service"] === "string" ? { service: search["service"] } : {},
   head: () => ({
     meta: [
       { title: "Запись — А&Астудия" },
@@ -65,9 +64,18 @@ function BookingPage() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!time) return toast.error("Выберите время");
-    if (!name.trim()) return toast.error("Укажите имя");
-    if (!phone.trim()) return toast.error("Укажите телефон");
+    if (!time) {
+      toast.error("Выберите время");
+      return;
+    }
+    if (!name.trim()) {
+      toast.error("Укажите имя");
+      return;
+    }
+    if (!phone.trim()) {
+      toast.error("Укажите телефон");
+      return;
+    }
     setSaving(true);
     const { error } = await supabase.from("bookings").insert({
       service_id: selected?.id ?? null,
