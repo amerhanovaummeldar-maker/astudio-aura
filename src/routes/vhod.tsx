@@ -51,7 +51,8 @@ function LoginPage() {
       });
       if (error) {
         setBusy(false);
-        return toast.error(error.message);
+        toast.error(error.message);
+        return;
       }
       const uid = data.user?.id;
       if (uid && data.session) {
