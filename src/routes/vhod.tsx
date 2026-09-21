@@ -38,7 +38,10 @@ function LoginPage() {
     if (mode === "login") {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       setBusy(false);
-      if (error) return toast.error("Неверный e-mail или пароль");
+      if (error) {
+        toast.error("Неверный e-mail или пароль");
+        return;
+      }
       navigate({ to: "/admin", replace: true });
     } else {
       const { data, error } = await supabase.auth.signUp({
